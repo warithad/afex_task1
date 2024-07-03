@@ -7,11 +7,15 @@ def check_prime_number(num):
     return True
 
 def check_palindrome(num):
-    num_as_str = str(num)
-    n = len(num_as_str)
-    lp, rp = 0, n-1
+    nums: list[int] = []
+    while num > 0:
+        curr = num % 10
+        nums.append(curr)
+        num //= 10
+    lp, rp = 0, len(nums) - 1
+    print(nums)
     while lp < rp:
-        if num_as_str[lp] is not num_as_str[rp]:
+        if nums[lp] is not nums[rp]:
             return False
         lp += 1
         rp -= 1
@@ -19,6 +23,12 @@ def check_palindrome(num):
 
 def find_max(nums):
     return max(nums)
+
+def find_max_without_max(nums: list) -> int:
+    res = nums[0]
+    for i in nums:
+        if res < i: res = i
+    return res
 
 def check_pangram(word):
     return not bool(set(ascii_lowercase).symmetric_difference(word))
@@ -35,12 +45,9 @@ def check_perfect_number(num) -> bool:
     return total == num
 
 
-
 # print(check_prime_number(3)) # True
 # print(check_prime_number(2)) # False
 # print(check_prime_number(6)) # False
-# print(check_palindrome(112211)) #True
-# print(check_palindrome(312324))#False
 # print(find_max([3, 45, 214, 2, 745, 43])) # 745
 # print(check_pangram('lsfewoafapqwerads')) #False
 # print(check_pangram('abcdefghijklmnopqrstuvwxyzz')) #True
